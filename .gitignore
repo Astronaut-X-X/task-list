@@ -1,3 +1,6 @@
+# front_end
+front_end/node_modules/.bin
+
 # Editor directories and files
 .idea
 .vscode
