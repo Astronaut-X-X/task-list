@@ -1,7 +1,9 @@
 package main
 
-import "fmt"
+import (
+	_ "github.com/Astronaut-X-X/TaskList/back_end/model"
+)
 
 func main() {
-	fmt.Println("Task List.")
+
 }
