@@ -1,13 +1,5 @@
 package config
 
-<<<<<<< HEAD
-const DB_NAME string = "DB.db"
-
-const ADMIN_NAME string = "admin"
-const ADMIN_PASSWORD string = "fc02f4589391496b" // (MD5加密)
-
-const PAGE_QUANTITY int = 10 // 页面的书籍量
-=======
 const DB_USERNAME string = "root"
 const DB_PASSWORD string = "123456"
 const DB_HOST string = "127.0.0.1"
@@ -20,4 +12,3 @@ const DB_LOC = "local"      // 时区
 func init() {
 
 }
->>>>>>> master
