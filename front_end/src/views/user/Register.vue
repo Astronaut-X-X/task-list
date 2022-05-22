@@ -2,8 +2,8 @@
   <div>
     <el-container>
       <el-main>
-        <el-row>
-          <el-col :span="6" :offset="12">
+        <el-row type="flex" justify="center">
+          <el-col :span="6">
             <div>
               <el-form ref="form" :model="form" label-width="100px">
                 <el-form-item label="用户名">
@@ -47,5 +47,5 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style>
 </style>
