@@ -16,9 +16,10 @@ export default {
   -moz-osx-font-smoothing: grayscale;
 }
 
-html,body{
-  height: 100%;
-  background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
-  overflow:hidden;
-}
+/* html,body{ */
+  /* height: 100%; */
+  /* background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb  100%); */    
+  /* background-image: linear-gradient(120deg, #a1c4fd 0%, #a1c4fd  100%);     */
+  /* overflow:hidden; */
+/* } */
 </style>
