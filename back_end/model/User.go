@@ -14,10 +14,6 @@ type User struct {
 	gorm.Model
 }
 
-func (User) TableName() string {
-	return "tl_user"
-}
-
 func (user *User) Create() (tx *gorm.DB, ok bool) {
 	result := DB.Create(user)
 	if result.RowsAffected > 0 {

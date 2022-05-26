@@ -7,6 +7,7 @@ import (
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"gorm.io/gorm/schema"
 )
 
 var DB *gorm.DB
@@ -24,22 +25,25 @@ func init() {
 		config.DB_PARSETIME,
 		// config.DB_LOC,
 	)
-
 	var err error
-	DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{
+		NamingStrategy: schema.NamingStrategy{
+			TablePrefix: config.DB_TablePrefix,
+		},
+	})
 	if err != nil {
 		// TODO log
 		panic("Something worry with open db.")
 	}
-
 	migrate()
 
 }
 
 func migrate() {
-	fmt.Println("migrate")
 	DB.AutoMigrate(
 		&User{},
+		&Task{},
+		&Goal{},
+		&Todo{},
 	)
-
 }

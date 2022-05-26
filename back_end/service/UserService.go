@@ -15,9 +15,9 @@ type UserClaims struct {
 
 var hmacSampleSecret = []byte{3, 0, 7, 6, 8, 0, 1, 8, 6}
 
-func LoginService(username, password string) (token string, err error, ok bool) {
-	if user, ok := model.SelectUserByUsername(username); ok {
-		if reflect.DeepEqual(user.Password, password) {
+func LoginService(user model.User) (token string, err error, ok bool) {
+	if tmpUser, ok := model.SelectUserByUsername(user.Username); ok {
+		if reflect.DeepEqual(tmpUser.Password, user.Password) {
 			token := jwt.NewWithClaims(jwt.SigningMethodES256, &UserClaims{
 				id: user.Model.ID,
 			})
