@@ -10,9 +10,8 @@ var R *gin.Engine
 func init() {
 
 	R = gin.Default()
-	R.Run()
-
 	initRouter()
+	R.Run()
 
 }
 
@@ -20,13 +19,13 @@ func initRouter() {
 	api := R.Group("/api")
 	v1 := api.Group("/v1")
 	{
-		user := v1.Group("/user", handler.Login)
+		user := v1.Group("/user", handler.LoginHandler())
 		user.POST("/login")
 		user.POST("") // 注册
 	}
-
+	v2 := api.Group("/v2")
 	{
-
+		v2.GET("/")
 	}
 
 }

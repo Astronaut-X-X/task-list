@@ -1,18 +1,24 @@
 package model
 
-import "gorm.io/gorm"
+import (
+	"github.com/Astronaut-X-X/TaskList/back_end/util"
+
+	"gorm.io/gorm"
+)
 
 type User struct {
-	Username string `json:"username" gorm:"unique;not null"`
-	Password string `json:"password" gorm:"unique;not null"`
-	Model    gorm.Model
+	Username string `json:"username" gorm:"unique;not null;"`
+	Password string `json:"password" gorm:"not null;"`
+	Image    string `json:"image" gorm:"default ''"`
+	Email    string `json:"email" gorm:"not null;"`
+	gorm.Model
 }
 
 func (User) TableName() string {
 	return "tl_user"
 }
 
-func CreateUser(user *User) (tx *gorm.DB, ok bool) {
+func (user *User) Create() (tx *gorm.DB, ok bool) {
 	result := DB.Create(user)
 	if result.RowsAffected > 0 {
 		return result, true
@@ -20,12 +26,32 @@ func CreateUser(user *User) (tx *gorm.DB, ok bool) {
 	return result, false
 }
 
-func UpdateUser(id uint, user *User) (tx *gorm.DB, ok bool) {
-	result := DB.Where("id = ?", id).Save(user)
+func (user *User) Update() (tx *gorm.DB, ok bool) {
+	result := DB.Where("id = ?", user.Model.ID).Save(user)
 	if result.RowsAffected > 0 {
 		return result, true
 	}
 	return result, false
+}
+
+func (user *User) Delete() (tx *gorm.DB, ok bool) {
+	result := DB.Where("id = ?", user.Model.ID).Delete(&User{})
+	if result.Error == nil {
+		return result, true
+	}
+	return result, false
+}
+
+func (user *User) BeforeCreate(tx *gorm.DB) (err error) {
+	user.Password = util.MD5Encipher(user.Password)
+	// TODO logging
+	return nil
+}
+
+func (user *User) BeforeUpdate(tx *gorm.DB) (err error) {
+	user.Password = util.MD5Encipher(user.Password)
+	// TODO logging
+	return nil
 }
 
 func SelectUserByUsername(username string) (user User, ok bool) {
@@ -42,4 +68,12 @@ func SelectUserById(id uint) (user User, ok bool) {
 		return user, true
 	}
 	return user, false
+}
+
+func SelectUser(id uint) (users []User, ok bool) {
+	result := DB.Find(&users, id)
+	if result.RowsAffected > 0 {
+		return users, true
+	}
+	return users, false
 }

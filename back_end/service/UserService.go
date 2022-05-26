@@ -16,7 +16,6 @@ type UserClaims struct {
 var hmacSampleSecret = []byte{3, 0, 7, 6, 8, 0, 1, 8, 6}
 
 func LoginService(username, password string) (token string, err error, ok bool) {
-
 	if user, ok := model.SelectUserByUsername(username); ok {
 		if reflect.DeepEqual(user.Password, password) {
 			token := jwt.NewWithClaims(jwt.SigningMethodES256, &UserClaims{
@@ -33,5 +32,4 @@ func LoginService(username, password string) (token string, err error, ok bool) 
 	} else {
 		return "", errors.New(("User is not exist")), false
 	}
-
 }

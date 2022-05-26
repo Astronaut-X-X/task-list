@@ -1,7 +1,7 @@
 <template>
-  <div class="container flex justify-center">
-    <el-form ref="form" :model="form" class="mt-48 w-96 bg-blue-300 pt-16 pb-14 px-14 shadow-md hover:shadow-lg">
-      <el-form-item >
+  <div class="container flex justify-center w-full">
+    <el-form ref="form" :model="form" class="mt-48 w-3/12 bg-blue-300 pt-16 pb-14 px-14 shadow-md hover:shadow-lg">
+      <el-form-item>
         <el-input v-model="form.username"></el-input>
       </el-form-item>
       <el-form-item class="">

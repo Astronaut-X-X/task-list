@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/Astronaut-X-X/TaskList/back_end/config"
+
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -12,7 +13,8 @@ var DB *gorm.DB
 
 func init() {
 
-	dsn := fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?charset=%v&parseTime=%v&loc=%v",
+	// dsn := fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?charset=%v&parseTime=%v&loc=%v",
+	dsn := fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?charset=%v&parseTime=%v",
 		config.DB_USERNAME,
 		config.DB_PASSWORD,
 		config.DB_HOST,
@@ -20,7 +22,7 @@ func init() {
 		config.DB_DATABASE_NAME,
 		config.DB_CHARSET,
 		config.DB_PARSETIME,
-		config.DB_LOC,
+		// config.DB_LOC,
 	)
 
 	var err error
@@ -30,10 +32,12 @@ func init() {
 		panic("Something worry with open db.")
 	}
 
+	migrate()
+
 }
 
 func migrate() {
-
+	fmt.Println("migrate")
 	DB.AutoMigrate(
 		&User{},
 	)
