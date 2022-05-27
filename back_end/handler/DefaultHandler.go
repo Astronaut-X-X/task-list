@@ -9,7 +9,7 @@ import (
 )
 
 func DefaultHandler(c *gin.Context) {
-	c.JSON(http.StatusNotFound, nil)
+	util.Response(c, http.StatusOK, 201, util.ResMsg[201])
 }
 
 func HomeHandler(c *gin.Context) {

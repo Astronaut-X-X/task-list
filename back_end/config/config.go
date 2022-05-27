@@ -26,6 +26,9 @@ const WEB_READTIMEOUT = 3 * 10 * time.Second
 const WEB_WRITETIMEOUT = 3 * 10 * time.Second
 const WEB_MAXHEADERBYTES = 1 << 20
 
+// JWT
+const JWT_MY_SECRET_KEY string = "307680186@qq.com"
+
 func init() {
 	fmt.Println("loading config ...")
 }

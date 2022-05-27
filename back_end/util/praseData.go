@@ -13,7 +13,7 @@ import (
 func PraseData(c *gin.Context, object interface{}) {
 	data, err := c.GetRawData()
 	if err != nil {
-		c.JSON(http.StatusBadRequest, err)
+		Response(c, http.StatusBadRequest, 4001, ResMsg[4001])
 		c.Abort()
 	}
 	json.Unmarshal(data, &object)
