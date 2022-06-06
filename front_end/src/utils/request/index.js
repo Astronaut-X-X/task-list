@@ -1,13 +1,12 @@
 import axios from 'axios'
-import { ElMessage } from 'element-plus'
 
 const api = axios.create({
-    baseUrl:'http://localhost:8080',
-    tiemout:8000,
-    header:{}
+    baseUrl: 'http://localhost:8080',
+    tiemout: 8000,
+    header: {}
 })
 
-api.interceptors.request.use((req)=>{
+api.interceptors.request.use((req) => {
     //  TODO
     const header = req.headers
     if (header.Authorization) header.Authorization = "nil"
@@ -15,22 +14,21 @@ api.interceptors.request.use((req)=>{
 
 })
 
-api.interceptors.response.use((req)=>{
-    const { code , data ,msg} = req.data
-    if (code == 200){
+api.interceptors.response.use((req) => {
+    const { code, data, msg } = req.data
+    if (code == 200) {
         return data
-    }else{
-        ElMessage.error(msg)     
+    } else {
         return Promise.reject(msg)
     }
 })
 
-function request(options){
+function request(options) {
     options.method = options.method || 'get'
-    if (options.method.toLowerCase() === 'get'){
+    if (options.method.toLowerCase() === 'get') {
         options.params = options.data
     }
     return api(options)
 }
 
-export default  request
+export default request

@@ -1,15 +1,16 @@
-import { createApp } from 'vue'
-import ElementPlus from 'element-plus'
-import 'element-plus/dist/index.css'
+import Vue from 'vue'
 import App from './App.vue'
-import router from './router'
+import store from 'vuex'
 import request from './utils/request'
 import storage from './utils/storage'
-import './index.css'
+import router from './router'
 
-const app = createApp(App)
-app.use(ElementPlus)
-app.use(router)
-app.mount('#app')
-app.config.globalProperties.$request = request
-app.config.globalProperties.$storage = storage
+Vue.config.productionTip = false
+Vue.prototype.$request = request;
+Vue.prototype.$storage = storage;
+
+new Vue({
+    router,
+    store,
+    render: h => h(App)
+}).$mount("#app")

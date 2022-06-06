@@ -1,53 +1,24 @@
 {
   "name": "front_end",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "author": "Astronaut-X-X",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "serve": "vite",
+    "build": "vite build"
   },
   "dependencies": {
-    "axios": "^0.27.2",
-    "core-js": "^3.6.5",
-    "element-plus": "^2.2.0",
-    "vue": "^3.0.0",
-    "vue-router": "^4.0.0-0"
+    "axios": "^0.25.0",
+    "vite": "^2.7.13",
+    "vue": "^2.6.14",
+    "vue-router": "^3.5.3",
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.11",
-    "@vue/cli-plugin-eslint": "~4.5.11",
-    "@vue/cli-plugin-router": "^4.5.17",
-    "@vue/cli-plugin-vuex": "^4.5.17",
-    "@vue/cli-service": "~4.5.11",
-    "@vue/compiler-sfc": "^3.0.0",
-    "autoprefixer": "9",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^7.0.0",
-    "node-sass": "4.14.1",
-    "postcss": "7",
-    "sass-loader": "7.3.1",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
-    "vue-cli-plugin-axios": "0.0.4"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/vue3-essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "rules": {}
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ]
+    "vite-plugin-vue2": "^1.9.2",
+    "vite-plugin-windicss": "^1.8.4",
+    "vue-template-compiler": "^2.6.14",
+    "windicss": "^3.5.4"
+  }
 }

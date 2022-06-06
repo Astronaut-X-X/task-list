@@ -5,19 +5,19 @@ const routes = [
     path: '/',
     name: 'Home',
     meta: { title: '首页' },
-    component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue')
+    component: () => import(/* webpackChunkName: "home" */ '../components/Home.vue')
   },
   {
     path: '/login',
     name: 'Login',
     meta: { title: '登录' },
-    component: () => import(/* webpackChunkName: "login" */ '../views/user/Login.vue')
+    component: () => import(/* webpackChunkName: "login" */ '../components/user/Login.vue')
   },
   {
     path: '/register',
     name: 'Register',
     meta: { title: '注册' },
-    component: () => import(/* webpackChunkName: "register" */ '../views/user/Register.vue')
+    component: () => import(/* webpackChunkName: "register" */ '../components/user/Register.vue')
   }
   // {
   // path: '/about',
