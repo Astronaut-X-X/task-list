@@ -5,9 +5,9 @@
             <nav class="flex justify-end">
                 <div class="" v-if="true">
                     <a class="mx-4 p-2 w-28 font-light tracking-wide hover:bg-blue-200 transition-all"
-                        @click="login">Login</a>
+                        @click="login">登录</a>
                     <a class="mx-4 p-2 w-28 font-light tracking-wide hover:bg-blue-200 transition-all"
-                        @click="register">Register</a>
+                        @click="register">注册</a>
                 </div>
                 <div v-else>
                     <a>Task</a>
@@ -16,7 +16,7 @@
             </nav>
         </header>
         <main>
-            <transition mode="out-in">
+            <transition name="el-fade-in-linear" mode="out-in">
                 <router-view></router-view>
             </transition>
         </main>
