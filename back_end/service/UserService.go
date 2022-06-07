@@ -1,8 +1,6 @@
 package service
 
 import (
-	"errors"
-	"fmt"
 	"reflect"
 	"time"
 
@@ -20,16 +18,14 @@ type UserClaims struct {
 
 var hmacSampleSecret = []byte(config.JWT_MY_SECRET_KEY)
 
-func LoginService(user model.User) (string, error, bool) {
+func LoginService(user model.User) (string, bool) {
 	user.Password = util.MD5Encipher(user.Password)
 	tmpUser, ok := model.SelectUserByUsername(user.Username)
 	if !ok {
-		fmt.Println("User not")
-		return "", errors.New("User is not exist"), false
+		return "User is not exist", false
 	}
 	if !reflect.DeepEqual(tmpUser.Password, user.Password) {
-		fmt.Println("Pass")
-		return "", errors.New("Password is not right"), false
+		return "Password is not right", false
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"exp": time.Now().Add(360 * time.Hour).Unix(),
@@ -38,7 +34,20 @@ func LoginService(user model.User) (string, error, bool) {
 	})
 	tokenString, err := token.SignedString(hmacSampleSecret)
 	if err != nil {
-		return "", err, false
+		// TODO log recode err
+		return "Token generation failed", false
 	}
-	return tokenString, nil, true
+	return tokenString, true
+}
+
+func ReigsterUser(user model.User) (string, bool) {
+	_, ok := model.SelectUserByUsername(user.Username)
+	if ok {
+		return "User is exist", false
+	}
+	user.Password = util.MD5Encipher(user.Password)
+	if user.Create() {
+		return "User generation succeeded", true
+	}
+	return "Error db option", false
 }

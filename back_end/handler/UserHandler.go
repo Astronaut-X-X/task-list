@@ -6,28 +6,51 @@ import (
 	"github.com/Astronaut-X-X/TaskList/back_end/model"
 	"github.com/Astronaut-X-X/TaskList/back_end/service"
 	"github.com/Astronaut-X-X/TaskList/back_end/util"
+	v "github.com/Astronaut-X-X/TaskList/back_end/validator"
 
 	"github.com/gin-gonic/gin"
 )
 
 func LoginHandler(c *gin.Context) {
 	var user model.User
-	_ = c.ShouldBindJSON(&user) // TODO deal err
-	token, err, ok := service.LoginService(user)
+	err := c.ShouldBindJSON(&user)
+	if err != nil {
+		// TODO log
+		return
+	}
+	code, ok := v.VerifyUserNamePasd(user)
+	if !ok {
+		util.Response(c, http.StatusBadRequest, code, util.ResMsg[code])
+		return
+	}
+	res, ok := service.LoginService(user)
 	if ok {
-		util.Response(c, http.StatusOK, 200, gin.H{"token": token})
+		util.Response(c, http.StatusOK, 200, gin.H{"token": res})
 	} else {
-		util.Response(c, http.StatusBadRequest, 4000, err.Error())
+		util.Response(c, http.StatusBadRequest, 4000, res)
 	}
 }
 
 func RegisterHandler(c *gin.Context) {
 	var user model.User
-	_ = c.ShouldBindJSON(&user) // TODO deal err
-	res, ok := user.Create()
+	err := c.ShouldBindJSON(&user) // TODO deal err
+	if err != nil {
+		// TODO log
+	}
+	code, ok := v.VerifyUserNamePasd(user)
 	if !ok {
-		util.Response(c, http.StatusBadRequest, 4000, res.Error.Error())
+		util.Response(c, http.StatusBadRequest, code, util.ResMsg[code])
+		return
+	}
+	code, ok = v.VerifyUserEmail(user)
+	if !ok {
+		util.Response(c, http.StatusBadRequest, code, util.ResMsg[code])
+		return
+	}
+	res, ok := service.ReigsterUser(user)
+	if ok {
+		util.Response(c, http.StatusOK, 200, res)
 	} else {
-		util.Response(c, http.StatusOK, 200, util.ResMsg[200])
+		util.Response(c, http.StatusBadRequest, 4000, res)
 	}
 }

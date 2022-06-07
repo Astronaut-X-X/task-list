@@ -46,8 +46,8 @@ func initRouter() {
 	api := R.Group("/api")
 	auth := api.Group("/auth")
 	{
-		auth.POST("/login", v.VerifyUserNamePasd(), handler.LoginHandler)
-		auth.POST("", v.VerifyUserNamePasd(), v.VerifyUserEmail(), handler.RegisterHandler)
+		auth.POST("/login", handler.LoginHandler)
+		auth.POST("/register", handler.RegisterHandler)
 	}
 
 	v1 := api.Group("/v1", v.VerifyToken())

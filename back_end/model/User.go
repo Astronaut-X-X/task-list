@@ -1,8 +1,6 @@
 package model
 
 import (
-	"github.com/Astronaut-X-X/TaskList/back_end/util"
-
 	"gorm.io/gorm"
 )
 
@@ -14,62 +12,55 @@ type User struct {
 	gorm.Model
 }
 
-func (user *User) Create() (tx *gorm.DB, ok bool) {
-	result := DB.Create(user)
-	if result.RowsAffected > 0 {
-		return result, true
+func (user *User) Create() (ok bool) {
+	err := DB.Create(user).Error
+	if err != nil {
+		// TODO log
+		return false
 	}
-	return result, false
+	return true
 }
 
-func (user *User) Update() (tx *gorm.DB, ok bool) {
-	result := DB.Where("id = ?", user.Model.ID).Save(user)
-	if result.RowsAffected > 0 {
-		return result, true
+func (user *User) Update() (ok bool) {
+	err := DB.Where("id = ?", user.Model.ID).Save(user).Error
+	if err != nil {
+		// TODO log
+		return false
 	}
-	return result, false
+	return true
 }
 
-func (user *User) Delete() (tx *gorm.DB, ok bool) {
-	result := DB.Where("id = ?", user.Model.ID).Delete(&User{})
-	if result.Error == nil {
-		return result, true
+func (user *User) Delete() (ok bool) {
+	err := DB.Where("id = ?", user.Model.ID).Delete(&User{}).Error
+	if err != nil {
+		// TODO log
+		return false
 	}
-	return result, false
-}
-
-func (user *User) BeforeCreate(tx *gorm.DB) (err error) {
-	user.Password = util.MD5Encipher(user.Password)
-	// TODO logging
-	return nil
-}
-
-func (user *User) BeforeUpdate(tx *gorm.DB) (err error) {
-	user.Password = util.MD5Encipher(user.Password)
-	// TODO logging
-	return nil
+	return true
 }
 
 func SelectUserByUsername(username string) (user User, ok bool) {
-	result := DB.Model(&User{}).Where("username = ?", username).First(&user)
-	if result.RowsAffected > 0 {
+	err := DB.Model(&User{}).Where("username = ?", username).First(&user).Error
+	if err != nil {
+		// TODO log
 		return user, true
 	}
 	return user, false
 }
 
-func SelectUserById(id uint) (user User, ok bool) {
-	result := DB.First(&user, id)
-	if result.RowsAffected > 0 {
-		return user, true
+func SelectUserById(id int) (user User, ok bool) {
+	err := DB.First(&user, id).Error
+	if err != nil {
+		// TODO log
+		return user, false
 	}
-	return user, false
+	return user, true
 }
 
-func SelectUser(id uint) (users []User, ok bool) {
-	result := DB.Find(&users, id)
-	if result.RowsAffected > 0 {
-		return users, true
+func SelectUser() (users []User, ok bool) {
+	err := DB.Find(&users).Error
+	if err != nil {
+		return users, false
 	}
-	return users, false
+	return users, true
 }

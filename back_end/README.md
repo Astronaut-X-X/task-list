@@ -34,8 +34,9 @@
 
 ## TODO
 
--[+] jwt  
--[ ] email register  
+- [+] jwt  
+- [ ] email register  
+- [ ] logging
 
 ## module
 
