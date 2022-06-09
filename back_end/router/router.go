@@ -6,7 +6,7 @@ import (
 
 	"github.com/Astronaut-X-X/TaskList/back_end/config"
 	"github.com/Astronaut-X-X/TaskList/back_end/handler"
-	v "github.com/Astronaut-X-X/TaskList/back_end/middleware/validator"
+	m "github.com/Astronaut-X-X/TaskList/back_end/middleware"
 
 	"github.com/gin-gonic/gin"
 )
@@ -50,7 +50,7 @@ func initRouter() {
 		auth.POST("/register", handler.RegisterHandler)
 	}
 
-	v1 := api.Group("/v1", v.VerifyToken())
+	v1 := api.Group("/v1", m.VerifyToken())
 	{
 		tasklist := v1.Group("/tasklsit")
 		{

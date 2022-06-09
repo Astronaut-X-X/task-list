@@ -9,5 +9,12 @@ export default () => {
       createVuePlugin(),
       WindiCSS(),
     ],
+    server: {
+      port: '3000',
+      proxy: {
+        // 字符串简写写法
+        '/api': 'http://localhost:8081',
+      }
+    }
   })
 }

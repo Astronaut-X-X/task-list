@@ -42,11 +42,11 @@ func RegisterHandler(c *gin.Context) {
 		util.Response(c, http.StatusBadRequest, code, util.ResMsg[code])
 		return
 	}
-	code, ok = v.VerifyUserEmail(user)
-	if !ok {
-		util.Response(c, http.StatusBadRequest, code, util.ResMsg[code])
-		return
-	}
+	// code, ok = v.VerifyUserEmail(user)
+	// if !ok {
+	// 	util.Response(c, http.StatusBadRequest, code, util.ResMsg[code])
+	// 	return
+	// }
 	res, ok := service.ReigsterUser(user)
 	if ok {
 		util.Response(c, http.StatusOK, 200, res)

@@ -43,9 +43,9 @@ func SelectUserByUsername(username string) (user User, ok bool) {
 	err := DB.Model(&User{}).Where("username = ?", username).First(&user).Error
 	if err != nil {
 		// TODO log
-		return user, true
+		return user, false
 	}
-	return user, false
+	return user, true
 }
 
 func SelectUserById(id int) (user User, ok bool) {
