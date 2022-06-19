@@ -1,4 +1,5 @@
 import axios from 'axios'
+import storage from '../storage'
 
 const api = axios.create({
     baseUrl: 'http://localhost:8080',
@@ -7,9 +8,11 @@ const api = axios.create({
 })
 
 api.interceptors.request.use((req) => {
-    //  TODO
-    const header = req.headers
-    if (header.Authorization) header.Authorization = "nil"
+    let token = storage.getItem('token');
+    req.headers = {
+        'Content-Type': 'application/json',
+        'Authorization': token,
+    }
     return req
 
 })
@@ -23,7 +26,7 @@ api.interceptors.response.use((req) => {
     }
 })
 
-function request(options) {
+function request (options) {
     options.method = options.method || 'get'
     if (options.method.toLowerCase() === 'get') {
         options.params = options.data

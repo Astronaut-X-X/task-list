@@ -48,10 +48,16 @@ func initRouter() {
 	{
 		auth.POST("/login", handler.LoginHandler)
 		auth.POST("/register", handler.RegisterHandler)
+		auth.POST("/flash", handler.FlashToken)
 	}
 
 	v1 := api.Group("/v1", m.VerifyToken())
 	{
+		user := v1.Group("/user")
+		{
+			user.GET("", handler.GetUserByIDInContext)
+		}
+
 		tasklist := v1.Group("/tasklsit")
 		{
 			tasklist.GET("", handler.DefaultHandler)

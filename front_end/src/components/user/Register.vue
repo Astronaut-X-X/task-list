@@ -1,33 +1,36 @@
 <template>
-  <div class="container flex justify-center content-center">
-    <el-form :model="registerForm" :rules="rules" ref="registerForm" class="
-        bg-blue-100
-        pt-16
-        pb-10
-        px-16
-        mt-24
-        rounded-2xl
-        border-2 border-blue-50
-        shadow-sm shadow-blue-200
-        hover:shadow-md
-        duration-800
-      ">
-      <el-form-item prop="username">
-        <el-input prefix-icon="el-icon-user" type="text" v-model="registerForm.username" clearable></el-input>
-      </el-form-item>
-      <el-form-item prop="password">
-        <el-input prefix-icon="el-icon-view" type="password" v-model="registerForm.password" clearable></el-input>
-      </el-form-item>
-      <el-form-item prop="check_password">
-        <el-input prefix-icon="el-icon-view" type="password" v-model="registerForm.check_password" clearable></el-input>
-      </el-form-item>
-      <el-form-item>
-        <div class="flex justify-center">
-          <el-button type="primary" @click="submitForm('registerForm')">注册</el-button>
-          <el-button @click="resetForm('registerForm')">重置</el-button>
+  <div>
+    <header class="py-8 px-10">
+      <nav class="flex justify-between">
+        <div class="flex content-end">
+          <span class="text-3xl mr-8 divide" @click="home">TaskList</span>
         </div>
-      </el-form-item>
-    </el-form>
+        <div class="flex content-end">
+          <a class="mx-4 p-2 font-light tracking-wide hover:text-blue-500 transition-all" @click="login">登录</a>
+        </div>
+      </nav>
+    </header>
+    <main class="flex justify-center">
+      <div class="h-full w-72 mt-20">
+        <el-form :model="registerForm" :rules="rules" ref="registerForm">
+          <el-form-item prop="username">
+            <el-input prefix-icon="el-icon-user" type="text" v-model="registerForm.username" clearable></el-input>
+          </el-form-item>
+          <el-form-item prop="password">
+            <el-input prefix-icon="el-icon-view" type="password" v-model="registerForm.password" clearable></el-input>
+          </el-form-item>
+          <el-form-item prop="check_password">
+            <el-input prefix-icon="el-icon-view" type="password" v-model="registerForm.check_password" clearable>
+            </el-input>
+          </el-form-item>
+          <el-form-item>
+            <div class="flex justify-center">
+              <el-button class="w-full" type="primary" @click="submitForm('registerForm')">注册</el-button>
+            </div>
+          </el-form-item>
+        </el-form>
+      </div>
+    </main>
   </div>
 </template>
 
@@ -113,6 +116,12 @@ export default {
           });
         });
     },
+    home () {
+      this.$router.push("/");
+    },
+    login () {
+      this.$router.push("/login");
+    }
   },
 };
 </script>

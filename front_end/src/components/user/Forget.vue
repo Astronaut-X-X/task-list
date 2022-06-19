@@ -6,6 +6,7 @@
           <span class="text-3xl mr-8 divide" @click="home">TaskList</span>
         </div>
         <div class="flex content-end">
+          <a class="mx-4 p-2 font-light tracking-wide hover:text-blue-500 transition-all" @click="login">登录</a>
           <a class="mx-4 p-2 font-light tracking-wide hover:text-blue-500 transition-all" @click="register">注册</a>
         </div>
       </nav>
@@ -16,16 +17,10 @@
           <el-form-item prop="username">
             <el-input prefix-icon="el-icon-user" type="text" v-model="loginForm.username" clearable></el-input>
           </el-form-item>
-          <el-form-item prop="password">
-            <el-input prefix-icon="el-icon-view" type="password" v-model="loginForm.password" clearable></el-input>
-          </el-form-item>
           <el-form-item>
             <div>
-              <el-button class="w-full" type="primary" @click="submitForm('loginForm')">登录</el-button>
+              <el-button class="w-full" type="primary" @click="submitForm('loginForm')">修改</el-button>
             </div>
-          </el-form-item>
-          <el-form-item class="flex justify-end">
-            <a class="forget" @click="forget">忘记密码</a>
           </el-form-item>
         </el-form>
       </div>
@@ -34,14 +29,12 @@
 </template>
 
 <script>
-import { loginUser } from '../../api/user'
 export default {
   name: "Login",
   data () {
     return {
       loginForm: {
         username: "",
-        password: "",
       },
       rules: {
         username: [
@@ -52,16 +45,7 @@ export default {
             message: "长度在 6 到 20 个字符",
             trigger: "blur",
           },
-        ],
-        password: [
-          { required: true, message: "请输入密码", trigger: "blur" },
-          {
-            min: 6,
-            max: 20,
-            message: "长度在 6 到 20 个字符",
-            trigger: "blur",
-          },
-        ],
+        ]
       },
     };
   },
@@ -79,29 +63,11 @@ export default {
         }
       });
     },
-    resetForm (formName) {
-      this.$refs[formName].resetFields();
-    },
-    login () {
-      loginUser({
-        username: this.loginForm.username,
-        password: this.loginForm.password
-      })
-        .then((response) => {
-          if (response.token) {
-            this.$storage.setItem("token", response.token);
-          }
-          this.$router.push('/today');
-        })
-        .catch((error) => {
-          this.$message({
-            message: error,
-            center: true,
-          });
-        });
-    },
     home () {
       this.$router.push("/");
+    },
+    login () {
+      this.$router.push("/login");
     },
     register () {
       this.$router.push('/register');
@@ -114,10 +80,4 @@ export default {
 </script>
 
 <style>
-.forget {
-  color: #409eff;
-}
-.forget:hover {
-  color: #66b1ff;
-}
 </style>

@@ -14,6 +14,7 @@ var ResMsg = map[int]string{
 	4102: "The user email format is incorrect",
 
 	5001: "Regrxp error",
+	5002: "Database query failed",
 }
 
 func Response(c *gin.Context, httpCode int, code int, data interface{}) {

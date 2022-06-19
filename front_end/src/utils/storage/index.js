@@ -1,23 +1,24 @@
 
 const NAMESPACE = "TL"
 
-export default{
-    setItme(key,val){
+export default {
+    setItem (key, val) {
         let storage = this.getStorage()
         storage[key] = val
-        window.localStorage.setItem(NAMESPACE,JSON.stringify(storage))
+        window.localStorage.setItem(NAMESPACE, JSON.stringify(storage))
     },
-    getItem(key){
+    getItem (key) {
         return this.getStorage()[key]
     },
-    getStorage(){
+    getStorage () {
         return JSON.parse(window.localStorage.getItem(NAMESPACE) || "{}")
     },
-    clearItem(key){
-        let storage = this.getStorage
+    clearItem (key) {
+        let storage = this.getStorage()
         delete storage[key]
+        window.localStorage.setItem(NAMESPACE, JSON.stringify(storage))
     },
-    clearAll(){
+    clearAll () {
         window.localStorage.clear()
     }
 }

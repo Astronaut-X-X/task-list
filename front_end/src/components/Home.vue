@@ -1,39 +1,65 @@
 <template>
-    <!-- <div class="bg-blue-300 h-screen"> -->
-    <div class="h-screen">
-        <header class="pt-8 pr-10">
-            <nav class="flex justify-end">
-                <div class="" v-if="true">
-                    <a class="mx-4 p-2 w-28 font-light tracking-wide hover:bg-blue-200 transition-all"
-                        @click="login">登录</a>
-                    <a class="mx-4 p-2 w-28 font-light tracking-wide hover:bg-blue-200 transition-all"
-                        @click="register">注册</a>
-                </div>
-                <div v-else>
-                    <a>Task</a>
-                    <img src="" alt="">
-                </div>
-            </nav>
-        </header>
-        <main>
-            <transition name="el-fade-in-linear" mode="out-in">
-                <router-view></router-view>
-            </transition>
-        </main>
-    </div>
+  <div>
+    <header-vue></header-vue>
+    <main class="container flex justify-center content-center">
+      <transition name="el-fade-in-linear" mode="out-in">
+        <router-view></router-view>
+      </transition>
+    </main>
+  </div>
 </template>
 
 <script>
+import { getUserByIDInContext } from '../api/user';
+import HeaderVue from './Header.vue';
 export default {
-    name: 'Home',
-    methods: {
-        login() {
-            this.$router.push('/login');
-        },
-        register() {
-            this.$router.push('/register');
-        }
+  name: 'Home',
+  data () {
+    return {
+      isLogin: false
+    };
+  },
+  components: {
+    HeaderVue
+  },
+  mounted: function () {
+    this.checkIsLogin();
+  },
+  methods: {
+    // 坚持用户登录情况
+    checkIsLogin () {
+      let token = this.$storage.getItem('token');
+      if (token && token.length > 0) {
+        getUserByIDInContext({}).then((response) => {
+          this.$storage.setItem('user', response);
+        }).catch((error) => {
+          console.log(error);
+        })
+        this.isLogin = true;
+      } else {
+        this.isLogin = false;
+      }
+    },
+
+    // 
+
+    logout () {
+      this.$storage.clearItem('token');
+      this.$router.push('/');
+    },
+    task () {
+      this.$router.push('/task');
+    },
+    user () {
+      this.$router.push('/user');
+    },
+    login () {
+      this.$router.push('/login');
+    },
+    register () {
+      this.$router.push('/register');
     }
+  }
 }
 </script>
 
