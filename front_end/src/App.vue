@@ -1,5 +1,5 @@
 <template>
-  <div class="box m-32px bg-light-50 rounded-16px">
+  <div class="box m-32px bg-light-50 rounded-16px font-light">
     <router-view></router-view>
   </div>
 </template>

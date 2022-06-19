@@ -6,8 +6,8 @@
           <span class="text-3xl mr-8 divide" @click="home">TaskList</span>
         </div>
         <div class="flex content-end">
-          <a class="mx-4 p-2 font-light tracking-wide hover:text-blue-500 transition-all" @click="login">登录</a>
-          <a class="mx-4 p-2 font-light tracking-wide hover:text-blue-500 transition-all" @click="register">注册</a>
+          <a class="mx-4 p-2 tracking-wide hover:text-blue-500 transition-all" @click="login">登录</a>
+          <a class="mx-4 p-2 tracking-wide hover:text-blue-500 transition-all" @click="register">注册</a>
         </div>
       </nav>
     </header>

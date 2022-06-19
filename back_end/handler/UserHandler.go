@@ -8,6 +8,7 @@ import (
 	"github.com/Astronaut-X-X/TaskList/back_end/service"
 	"github.com/Astronaut-X-X/TaskList/back_end/util"
 	v "github.com/Astronaut-X-X/TaskList/back_end/validator"
+	"github.com/google/uuid"
 
 	"github.com/gin-gonic/gin"
 )
@@ -56,7 +57,7 @@ func RegisterHandler(c *gin.Context) {
 	}
 }
 
-func GetUserByIDInContext(c *gin.Context) {
+func GetUserHandler(c *gin.Context) {
 	id := c.GetFloat64("id")
 	fmt.Println(id)
 	user, ok := model.SelectUserById(int(id))
@@ -75,5 +76,46 @@ func FlashToken(c *gin.Context) {
 		util.Response(c, http.StatusOK, 200, gin.H{"token": res})
 	} else {
 		util.Response(c, http.StatusBadRequest, 4000, gin.H{"msg": res})
+	}
+}
+
+func UploadUserImageHandler(c *gin.Context) {
+	file, _ := c.FormFile("file")
+	path := "./static"
+	tmpFilename := uuid.New()
+	dst := fmt.Sprintf("%s/%s.jpg", path, tmpFilename)
+	filename := fmt.Sprintf("/%s.jpg", tmpFilename)
+	user, ok := model.SelectUserById(int(c.GetFloat64("id")))
+	if !ok {
+		util.Response(c, http.StatusBadRequest, 5002, gin.H{"msg": util.ResMsg[5002]})
+	}
+	user.Image = filename
+	ok = user.Update()
+	if !ok {
+		util.Response(c, http.StatusBadRequest, 5003, gin.H{"msg": util.ResMsg[5003]})
+	}
+	err := c.SaveUploadedFile(file, dst)
+	if err != nil {
+		util.Response(c, http.StatusBadRequest, 4000, gin.H{"msg": err.Error()})
+	} else {
+		util.Response(c, http.StatusOK, 200, gin.H{"filename": filename})
+	}
+}
+
+func UpdateUserHandler(c *gin.Context) {
+	var resUser model.User
+	err := c.ShouldBindJSON(&resUser) // TODO deal err
+	if err != nil {
+		// TODO log
+	}
+	user, ok := model.SelectUserById(int(c.GetFloat64("id")))
+	if !ok {
+		util.Response(c, http.StatusBadRequest, 5002, gin.H{"msg": util.ResMsg[5002]})
+	}
+	user.Username = resUser.Username
+	user.Email = resUser.Email
+	ok = user.Update()
+	if !ok {
+		util.Response(c, http.StatusBadRequest, 5003, gin.H{"msg": util.ResMsg[5003]})
 	}
 }

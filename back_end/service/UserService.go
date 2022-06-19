@@ -73,3 +73,7 @@ func FlashToken(tokenStr string) (string, bool) {
 		return "Token lose efficacy", false
 	}
 }
+
+func UpdateUser(){
+	
+}

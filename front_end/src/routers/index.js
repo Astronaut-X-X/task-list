@@ -97,7 +97,6 @@ function isLogged (to, from, next) {
 }
 
 function isNotLogged (to, from, next) {
-  console.log(to);
   if (to.name === 'Index') {
     next();
   } else {

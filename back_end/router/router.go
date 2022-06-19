@@ -16,6 +16,7 @@ var R *gin.Engine
 func init() {
 	R = gin.Default()
 	gin.SetMode(gin.DebugMode)
+	R.MaxMultipartMemory = 8 << 20 // 8 MiB
 	initRouter()
 	initStaticFile()
 	s := &http.Server{
@@ -55,7 +56,9 @@ func initRouter() {
 	{
 		user := v1.Group("/user")
 		{
-			user.GET("", handler.GetUserByIDInContext)
+			user.GET("", handler.GetUserHandler)
+			user.PUT("", handler.UpdateUserHandler)
+			user.POST("/image", handler.UploadUserImageHandler)
 		}
 
 		tasklist := v1.Group("/tasklsit")

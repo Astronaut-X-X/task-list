@@ -37,7 +37,7 @@
 - [+] jwt  
 - [ ] email register  
 - [ ] logging
-- [ ] 刷新Token
+- [ ] falsh the Token
 
 ## module
 

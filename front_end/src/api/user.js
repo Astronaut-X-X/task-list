@@ -35,3 +35,19 @@ export const loginUser = (data) => {
         data
     })
 }
+
+// @Tags user
+// @Summary 修改信息
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data 
+// @Success 200 {string} json "{"success":true,"data":{token:'token'},"msg":"获取成功"}"
+// @Router /api/v1/user/ [post]
+export const updateUser = (data) => {
+    return request({
+        url: "/api/auth/login",
+        method: "post",
+        data
+    })
+}

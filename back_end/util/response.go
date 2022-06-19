@@ -15,6 +15,7 @@ var ResMsg = map[int]string{
 
 	5001: "Regrxp error",
 	5002: "Database query failed",
+	5003: "Database update failed",
 }
 
 func Response(c *gin.Context, httpCode int, code int, data interface{}) {
