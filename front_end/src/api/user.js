@@ -43,11 +43,11 @@ export const loginUser = (data) => {
 // @Produce application/json
 // @Param data 
 // @Success 200 {string} json "{"success":true,"data":{token:'token'},"msg":"获取成功"}"
-// @Router /api/v1/user/ [post]
+// @Router /api/v1/user/update [post]
 export const updateUser = (data) => {
     return request({
-        url: "/api/auth/login",
-        method: "post",
+        url: "/api/v1/user",
+        method: "put",
         data
     })
 }

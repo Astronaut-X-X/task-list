@@ -118,4 +118,5 @@ func UpdateUserHandler(c *gin.Context) {
 	if !ok {
 		util.Response(c, http.StatusBadRequest, 5003, gin.H{"msg": util.ResMsg[5003]})
 	}
+	util.Response(c, http.StatusOK, 200, gin.H{"user": user})
 }

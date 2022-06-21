@@ -34,7 +34,7 @@
         <el-col :span="16">
           <span v-if="!isEditing">{{user.username}}</span>
           <el-form-item v-else prop="username">
-            <el-input type="text" v-model="user.username" clearable></el-input>
+            <el-input type="text" v-model="user.username" placeholder="用户名" clearable></el-input>
           </el-form-item>
         </el-col>
       </el-row>
@@ -44,7 +44,9 @@
         </el-col>
         <el-col :span="16">
           <span v-if="!isEditing">{{user.email}}</span>
-          <el-input v-else v-model="user.email" placeholder="邮箱" blur="checkUsername"></el-input>
+          <el-form-item v-else prop="email">
+            <el-input v-model="user.email" placeholder="邮箱" clearable></el-input>
+          </el-form-item>
         </el-col>
       </el-row>
     </el-form>
@@ -68,7 +70,7 @@
       <el-row type="flex" v-if="isEditing" justify="center" class="mt-6">
         <el-col :span="8">
           <div class="flex justify-center content-center">
-            <el-button class="w-1/2" type="primary" @click="submit">保存</el-button>
+            <el-button class="w-1/2" type="primary" @click="submit('userForm')">保存</el-button>
           </div>
         </el-col>
         <el-col :span="8">
@@ -82,16 +84,24 @@
 </template>
 
 <script>
+import { updateUser } from '../../api/user';
 export default {
   name: "Login",
   data () {
     let validateUsername = (rule, value, callback) => {
       if (value.length < 6 || value.length > 20) {
-        return callback(new Error('长度在 6 到 20 个字符'));
+        callback(new Error('长度在 6 到 20 个字符'));
+      } else {
+        callback();
       }
     };
     let validateEmail = (rule, value, callback) => {
-      
+      let regex = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+      if (!regex.test(value)) {
+        callback(new Error('邮箱不符合规范'));
+      } else {
+        callback();
+      }
     };
     return {
       isEditing: false,
@@ -119,12 +129,33 @@ export default {
       this.user = this.$storage.getItem('user');
     },
     edit () {
+      this.initUserInfo();
       this.isEditing = !this.isEditing;
     },
-    submit () {
-
+    submit (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          updateUser({
+            username: this.user.username,
+            email: this.user.email
+          }).then((response) => {
+            if (response.user) {
+              this.$storage.setItem('user', response.user);
+              this.user = response.user;
+            }
+            this.isEditing = false;
+            this.$message.success({ message: "修改成功" })
+          }).catch((error) => {
+            this.$message.error({ message: error });
+          });
+        } else {
+          this.$message.error({ message: "错误输入" });
+          return false;
+        }
+      });
     },
     cancel () {
+      this.initUserInfo();
       this.isEditing = false;
     },
     handleAvatarSuccess (res, file) {
