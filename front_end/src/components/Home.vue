@@ -1,7 +1,7 @@
 <template>
   <div>
     <header-vue></header-vue>
-    <main class="container flex justify-center content-center">
+    <main class="px-16 py-6">
       <transition name="el-fade-in-linear" mode="out-in">
         <router-view></router-view>
       </transition>

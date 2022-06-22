@@ -1,85 +1,87 @@
 <template>
-  <div class="h-full w-2/5 mt-6">
-    <el-row>
-      <el-col :span="8">
-        <p class="text-3xl">用户信息</p>
-      </el-col>
-      <el-col :span="16">
-        <div class="flex justify-end content-center">
-          <el-button type="primary" @click="edit">编辑</el-button>
-        </div>
-      </el-col>
-    </el-row>
-    <el-row class="mt-6 flex items-end">
-      <el-col :span="8">
-        <span>用户头像</span>
-      </el-col>
-      <el-col :span="8">
-        <el-avatar :size="64" :src="user.image || '/header_image.jpg'"></el-avatar>
-      </el-col>
-      <el-col :span="8">
-        <div class="flex justify-end content-center">
-          <el-upload :action="imageUploadUrl" :headers="headers" :show-file-list="false"
-            :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
-            <el-button type="info">上传</el-button>
-          </el-upload>
-        </div>
-      </el-col>
-    </el-row>
-    <el-form :model="user" :rules="rules" ref="userForm" class="user-form">
-      <el-row class="mt-6">
+  <div class="container flex justify-center content-center">
+    <div class="h-full w-2/5 mt-6">
+      <el-row>
         <el-col :span="8">
-          <span>用户名</span>
+          <p class="text-3xl">用户信息</p>
         </el-col>
         <el-col :span="16">
-          <span v-if="!isEditing">{{user.username}}</span>
-          <el-form-item v-else prop="username">
-            <el-input type="text" v-model="user.username" placeholder="用户名" clearable></el-input>
-          </el-form-item>
-        </el-col>
-      </el-row>
-      <el-row class="mt-6">
-        <el-col :span="8">
-          <span>用户邮箱</span>
-        </el-col>
-        <el-col :span="16">
-          <span v-if="!isEditing">{{user.email}}</span>
-          <el-form-item v-else prop="email">
-            <el-input v-model="user.email" placeholder="邮箱" clearable></el-input>
-          </el-form-item>
-        </el-col>
-      </el-row>
-    </el-form>
-    <el-row class="mt-6">
-      <el-col :span="8">
-        <span>用户创建时间</span>
-      </el-col>
-      <el-col :span="16">
-        <span>{{user.CreatedAt}}</span>
-      </el-col>
-    </el-row>
-    <el-row class="mt-6">
-      <el-col :span="8">
-        <span>用户修改时间</span>
-      </el-col>
-      <el-col :span="16">
-        <span>{{user.UpdatedAt}}</span>
-      </el-col>
-    </el-row>
-    <transition name="el-fade-in-linear">
-      <el-row type="flex" v-if="isEditing" justify="center" class="mt-6">
-        <el-col :span="8">
-          <div class="flex justify-center content-center">
-            <el-button class="w-1/2" type="primary" @click="submit('userForm')">保存</el-button>
-          </div>
-        </el-col>
-        <el-col :span="8">
-          <div class="flex justify-center content-center">
-            <el-button class="w-1/2" type="info" @click="cancel">取消</el-button>
+          <div class="flex justify-end content-center">
+            <el-button type="primary" @click="edit">编辑</el-button>
           </div>
         </el-col>
       </el-row>
-    </transition>
+      <el-row class="flex items-end">
+        <el-col :span="8">
+          <span>用户头像</span>
+        </el-col>
+        <el-col :span="8">
+          <el-avatar :size="64" :src="user.image || '/header_image.jpg'"></el-avatar>
+        </el-col>
+        <el-col :span="8">
+          <div class="flex justify-end content-center">
+            <el-upload :action="imageUploadUrl" :headers="headers" :show-file-list="false"
+              :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+              <el-button type="info">上传</el-button>
+            </el-upload>
+          </div>
+        </el-col>
+      </el-row>
+      <el-form :model="user" :rules="rules" ref="userForm" class="user-form">
+        <el-row class="mt-6">
+          <el-col :span="8">
+            <span>用户名</span>
+          </el-col>
+          <el-col :span="16">
+            <span v-if="!isEditing">{{user.username}}</span>
+            <el-form-item v-else prop="username">
+              <el-input type="text" v-model="user.username" placeholder="用户名" clearable></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row class="mt-6">
+          <el-col :span="8">
+            <span>用户邮箱</span>
+          </el-col>
+          <el-col :span="16">
+            <span v-if="!isEditing">{{user.email}}</span>
+            <el-form-item v-else prop="email">
+              <el-input v-model="user.email" placeholder="邮箱" clearable></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+      </el-form>
+      <el-row class="mt-6">
+        <el-col :span="8">
+          <span>用户创建时间</span>
+        </el-col>
+        <el-col :span="16">
+          <span>{{user.CreatedAt}}</span>
+        </el-col>
+      </el-row>
+      <el-row class="mt-6">
+        <el-col :span="8">
+          <span>用户修改时间</span>
+        </el-col>
+        <el-col :span="16">
+          <span>{{user.UpdatedAt}}</span>
+        </el-col>
+      </el-row>
+      <transition name="el-fade-in-linear">
+        <el-row type="flex" v-if="isEditing" justify="center" class="mt-6">
+          <el-col :span="8">
+            <div class="flex justify-center content-center">
+              <el-button class="w-1/2" type="primary" @click="submit('userForm')">保存</el-button>
+            </div>
+          </el-col>
+          <el-col :span="8">
+            <div class="flex justify-center content-center">
+              <el-button class="w-1/2" type="info" @click="cancel">取消</el-button>
+            </div>
+          </el-col>
+        </el-row>
+      </transition>
+    </div>
   </div>
 </template>
 

@@ -54,7 +54,40 @@ const routes = [
         path: '/manage',
         name: 'Manage',
         meta: { title: '管理' },
-        component: () => import('../components/manage/Manage.vue')
+        component: () => import('../components/manage/Manage.vue'),
+        redirect: { name: 'Daily' },
+        children: [
+          {
+            path: 'daily',
+            name: 'Daily',
+            meta: { title: '日计划' },
+            component: () => import('../components/manage/Daily.vue'),
+          },
+          {
+            path: 'todo',
+            name: 'Todo',
+            meta: { title: '待办事项' },
+            component: () => import('../components/manage/Todo.vue'),
+          },
+          {
+            path: 'goal',
+            name: 'Goal',
+            meta: { title: '待办事项' },
+            component: () => import('../components/manage/Goal.vue'),
+          },
+          {
+            path: 'quotes',
+            name: 'Quotes',
+            meta: { title: '待办事项' },
+            component: () => import('../components/manage/Quotes.vue'),
+          },
+          {
+            path: 'happy',
+            name: 'Happy',
+            meta: { title: '待办事项' },
+            component: () => import('../components/manage/Happy.vue'),
+          }
+        ]
       },
     ],
     beforeEnter: isNotLogged
