@@ -61,6 +61,14 @@ func initRouter() {
 			user.POST("/image", handler.UploadUserImageHandler)
 		}
 
+		dailyplan := v1.Group("/dailyplan")
+		{
+			dailyplan.GET("", handler.GetDailyPlanHandler)
+			dailyplan.POST("", handler.InsertDailyPlanHandler)
+			dailyplan.PUT("", handler.UpdateDailyPlanHandler)
+			dailyplan.DELETE("", handler.DeleteDailyPlanHandler)
+		}
+
 		tasklist := v1.Group("/tasklsit")
 		{
 			tasklist.GET("", handler.DefaultHandler)
