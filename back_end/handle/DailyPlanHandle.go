@@ -1,4 +1,4 @@
-package handler
+package handle
 
 import (
 	"net/http"
@@ -12,9 +12,9 @@ func GetDailyPlanHandler(c *gin.Context) {
 	id := c.GetFloat64("id")
 	res, ok := model.SelecetDailyPlanByUserId(uint(id))
 	if !ok {
-		util.Response(c, http.StatusOK, 200, gin.H{"data": res})
+		util.Response(c, http.StatusBadRequest, 5002, util.ResMsg[5002])
 	} else {
-		util.Response(c, http.StatusOK, 5002, util.ResMsg[5002])
+		util.Response(c, http.StatusOK, 200, gin.H{"data": res})
 	}
 }
 
@@ -27,9 +27,9 @@ func InsertDailyPlanHandler(c *gin.Context) {
 	dailyPlan.UserId = uint(c.GetFloat64("id"))
 	ok := dailyPlan.Create()
 	if !ok {
-		util.Response(c, http.StatusOK, 200, gin.H{"data": dailyPlan})
+		util.Response(c, http.StatusBadRequest, 5002, util.ResMsg[5002])
 	} else {
-		util.Response(c, http.StatusOK, 5002, util.ResMsg[5002])
+		util.Response(c, http.StatusOK, 200, gin.H{"data": dailyPlan})
 	}
 }
 
@@ -37,13 +37,13 @@ func DeleteDailyPlanHandler(c *gin.Context) {
 	dailyPlan := model.DailyPlan{}
 	err := c.ShouldBindJSON(&dailyPlan)
 	if err != nil {
-		util.Response(c, http.StatusOK, 4001, util.ResMsg[4001])
+		util.Response(c, http.StatusBadRequest, 4001, util.ResMsg[4001])
 	}
 	ok := dailyPlan.Delete()
 	if !ok {
-		util.Response(c, http.StatusOK, 200, gin.H{"data": "OK"})
+		util.Response(c, http.StatusBadRequest, 5002, util.ResMsg[5002])
 	} else {
-		util.Response(c, http.StatusOK, 5002, util.ResMsg[5002])
+		util.Response(c, http.StatusOK, 200, gin.H{"data": "OK"})
 	}
 }
 
@@ -51,12 +51,13 @@ func UpdateDailyPlanHandler(c *gin.Context) {
 	dailyPlan := model.DailyPlan{}
 	err := c.ShouldBindJSON(&dailyPlan)
 	if err != nil {
-		util.Response(c, http.StatusOK, 4001, util.ResMsg[4001])
+		util.Response(c, http.StatusBadRequest, 4001, util.ResMsg[4001])
 	}
+	dailyPlan.UserId = uint(c.GetFloat64("id"))
 	ok := dailyPlan.Update()
 	if !ok {
-		util.Response(c, http.StatusOK, 200, gin.H{"data": dailyPlan})
+		util.Response(c, http.StatusBadRequest, 5002, util.ResMsg[5002])
 	} else {
-		util.Response(c, http.StatusOK, 5002, util.ResMsg[5002])
+		util.Response(c, http.StatusOK, 200, gin.H{"data": dailyPlan})
 	}
 }

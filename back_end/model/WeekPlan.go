@@ -35,3 +35,12 @@ func (item *WeekPlan) Delete() (ok bool) {
 	}
 	return true
 }
+
+func SelecetWeekPlanByUserId(userid uint) (weekPlans []WeekPlan, ok bool) {
+	err := DB.Where("user_id = ?", userid).Find(&weekPlans).Error
+	if err != nil {
+		// TODO log
+		return weekPlans, false
+	}
+	return weekPlans, true
+}

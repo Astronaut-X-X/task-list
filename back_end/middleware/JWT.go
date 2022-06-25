@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/Astronaut-X-X/TaskList/back_end/config"
@@ -23,7 +22,6 @@ func VerifyToken() gin.HandlerFunc {
 			return []byte(config.JWT_MY_SECRET_KEY), nil
 		})
 		if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
-			fmt.Printf("%t", claims["id"])
 			c.Set("id", claims["id"])
 			c.Next()
 		} else {

@@ -45,5 +45,8 @@ func migrate() {
 		&Task{},
 		&Goal{},
 		&Todo{},
+		&DailyPlan{},
+		&DailyDetail{},
+		&WeekPlan{},
 	)
 }

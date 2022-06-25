@@ -1,16 +1,14 @@
 package model
 
 import (
-	"time"
-
 	"gorm.io/gorm"
 )
 
 type DailyDetail struct {
-	DailyPlanId uint      `json:"daily_plan_id" gorm:"not null;"`
-	StartTime   time.Time `json:"start_time" gorm:"not null;"`
-	EndTime     time.Time `json:"end_time" gorm:"not null;"`
-	Detail      uint      `json:"detail" gorm:"not null;"`
+	DailyPlanId uint   `json:"daily_plan_id" gorm:"not null;"`
+	StartTime   string `json:"start_time" gorm:"type:varchar(255);not null;"`
+	EndTime     string `json:"end_time" gorm:"type:varchar(255);not null;"`
+	Detail      string `json:"detail" gorm:"type:varchar(255);not null;"`
 	gorm.Model
 }
 
@@ -39,4 +37,13 @@ func (item *DailyDetail) Delete() (ok bool) {
 		return false
 	}
 	return true
+}
+
+func SelecetDailyDetailByDailyPlanId(dailyPlanid uint) (dailyDetails []DailyDetail, ok bool) {
+	err := DB.Where("daily_plan_id = ?", dailyPlanid).Find(&dailyDetails).Error
+	if err != nil {
+		// TODO log
+		return dailyDetails, false
+	}
+	return dailyDetails, true
 }

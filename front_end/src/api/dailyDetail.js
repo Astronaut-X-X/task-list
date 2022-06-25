@@ -12,9 +12,9 @@ import request from '../utils/request';
 //  page     int
 //	pageSize int
 // }
-export const getDailyPlan = (data) => {
+export const getDailyDetail = (data) => {
     return request({
-        url: '/api/v1/dailyplan',
+        url: '/api/v1/dailydetail',
         method: 'get',
         data
     })
@@ -32,9 +32,9 @@ export const getDailyPlan = (data) => {
 //  page     int
 //	pageSize int
 // }
-export const addDailyPlan = (data) => {
+export const addDailyDetail = (data) => {
     return request({
-        url: '/api/v1/dailyplan',
+        url: '/api/v1/dailydetail',
         method: 'post',
         data
     })
@@ -52,9 +52,9 @@ export const addDailyPlan = (data) => {
 //  page     int
 //	pageSize int
 // }
-export const updateDailyPlan = (data) => {
+export const updateDailyDetail = (data) => {
     return request({
-        url: '/api/v1/dailyplan',
+        url: '/api/v1/dailydetail',
         method: 'put',
         data
     })
@@ -72,9 +72,9 @@ export const updateDailyPlan = (data) => {
 //  page     int
 //	pageSize int
 // }
-export const deleteDailyPlan = (data) => {
+export const deleteDailyDetail = (data) => {
     return request({
-        url: '/api/v1/dailyplan',
+        url: '/api/v1/dailydetail',
         method: 'delete',
         data
     })

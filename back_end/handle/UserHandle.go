@@ -1,4 +1,4 @@
-package handler
+package handle
 
 import (
 	"fmt"
@@ -59,7 +59,6 @@ func RegisterHandler(c *gin.Context) {
 
 func GetUserHandler(c *gin.Context) {
 	id := c.GetFloat64("id")
-	fmt.Println(id)
 	user, ok := model.SelectUserById(int(id))
 	if ok {
 		user.Password = ""
