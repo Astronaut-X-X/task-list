@@ -3,7 +3,7 @@
     <header class="py-8 px-10">
       <nav class="flex justify-between">
         <div class="flex content-end">
-          <span class="text-3xl mr-8 divide" @click="home">TaskList</span>
+          <span class="text-3xl mr-8 divide font-extrabold" @click="home">TaskList</span>
         </div>
         <div class="flex content-end">
           <a class="mx-4 p-2 tracking-wide hover:text-blue-500 transition-all" @click="login">登录</a>

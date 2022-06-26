@@ -19,26 +19,28 @@ func GetWeekPlanHandler(c *gin.Context) {
 }
 
 func InsertWeekPlanHandler(c *gin.Context) {
-	dailyDetail := model.WeekPlan{}
-	err := c.ShouldBindJSON(&dailyDetail)
+	id := c.GetFloat64("id")
+	weekplan := model.WeekPlan{}
+	err := c.ShouldBindJSON(&weekplan)
 	if err != nil {
 		util.Response(c, http.StatusBadRequest, 4001, util.ResMsg[4001])
 	}
-	ok := dailyDetail.Create()
+	weekplan.UserId = uint(id)
+	ok := weekplan.Create()
 	if !ok {
 		util.Response(c, http.StatusBadRequest, 5002, util.ResMsg[5002])
 	} else {
-		util.Response(c, http.StatusOK, 200, gin.H{"data": dailyDetail})
+		util.Response(c, http.StatusOK, 200, gin.H{"data": weekplan})
 	}
 }
 
 func DeleteWeekPlanHandler(c *gin.Context) {
-	dailyDetail := model.WeekPlan{}
-	err := c.ShouldBindJSON(&dailyDetail)
+	weekplan := model.WeekPlan{}
+	err := c.ShouldBindJSON(&weekplan)
 	if err != nil {
 		util.Response(c, http.StatusBadRequest, 4001, util.ResMsg[4001])
 	}
-	ok := dailyDetail.Delete()
+	ok := weekplan.Delete()
 	if !ok {
 		util.Response(c, http.StatusBadRequest, 5002, util.ResMsg[5002])
 	} else {
@@ -47,15 +49,15 @@ func DeleteWeekPlanHandler(c *gin.Context) {
 }
 
 func UpdateWeekPlanHandler(c *gin.Context) {
-	dailyDetail := model.WeekPlan{}
-	err := c.ShouldBindJSON(&dailyDetail)
+	weekplan := model.WeekPlan{}
+	err := c.ShouldBindJSON(&weekplan)
 	if err != nil {
 		util.Response(c, http.StatusBadRequest, 4001, util.ResMsg[4001])
 	}
-	ok := dailyDetail.Update()
+	ok := weekplan.Update()
 	if !ok {
 		util.Response(c, http.StatusBadRequest, 5002, util.ResMsg[5002])
 	} else {
-		util.Response(c, http.StatusOK, 200, gin.H{"data": dailyDetail})
+		util.Response(c, http.StatusOK, 200, gin.H{"data": weekplan})
 	}
 }

@@ -12,9 +12,9 @@ import request from '../utils/request';
 //  page     int
 //	pageSize int
 // }
-export const getDailyDetail = (data) => {
+export const getWeekPlan = (data) => {
     return request({
-        url: '/api/v1/dailydetail',
+        url: '/api/v1/weekplan',
         method: 'get',
         data
     })
@@ -32,29 +32,9 @@ export const getDailyDetail = (data) => {
 //  page     int
 //	pageSize int
 // }
-export const getTodayDailyDetail = (data) => {
+export const addWeekPlan = (data) => {
     return request({
-        url: '/api/v1/dailydetail/today',
-        method: 'get',
-        data
-    })
-}
-
-// @Tags user
-// @Summary 获取用户信息
-// @Security ApiKeyAuth
-// @accept application/json
-// @Produce application/json
-// @Param data body modelInterface.PageInfo true "分页获取用户列表"
-// @Success 200 {string} json "{"success":true,"data":{},"msg":"获取成功"}"
-// @Router /api/v1/user [get]
-// {
-//  page     int
-//	pageSize int
-// }
-export const addDailyDetail = (data) => {
-    return request({
-        url: '/api/v1/dailydetail',
+        url: '/api/v1/weekplan',
         method: 'post',
         data
     })
@@ -72,9 +52,9 @@ export const addDailyDetail = (data) => {
 //  page     int
 //	pageSize int
 // }
-export const updateDailyDetail = (data) => {
+export const updateWeekPlan = (data) => {
     return request({
-        url: '/api/v1/dailydetail',
+        url: '/api/v1/weekplan',
         method: 'put',
         data
     })
@@ -92,9 +72,9 @@ export const updateDailyDetail = (data) => {
 //  page     int
 //	pageSize int
 // }
-export const deleteDailyDetail = (data) => {
+export const deleteWeekPlan = (data) => {
     return request({
-        url: '/api/v1/dailydetail',
+        url: '/api/v1/weekplan',
         method: 'delete',
         data
     })

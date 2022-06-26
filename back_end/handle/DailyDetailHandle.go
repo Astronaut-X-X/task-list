@@ -5,6 +5,7 @@ import (
 	"strconv"
 
 	"github.com/Astronaut-X-X/TaskList/back_end/model"
+	"github.com/Astronaut-X-X/TaskList/back_end/service"
 	"github.com/Astronaut-X-X/TaskList/back_end/util"
 	"github.com/gin-gonic/gin"
 )
@@ -14,6 +15,7 @@ func GetDailyDetailHandler(c *gin.Context) {
 	id, err := strconv.Atoi(strId)
 	if err != nil {
 		util.Response(c, http.StatusBadRequest, 5004, util.ResMsg[5004])
+		return
 	}
 	res, ok := model.SelecetDailyDetailByDailyPlanId(uint(id))
 	if !ok {
@@ -23,11 +25,22 @@ func GetDailyDetailHandler(c *gin.Context) {
 	}
 }
 
+func GetTodayDailyDetailHandler(c *gin.Context) {
+	id := c.GetFloat64("id")
+	dailyDetails, ok := service.GetTodayDailyDetailService(uint(id))
+	if !ok {
+		util.Response(c, http.StatusBadRequest, 5002, util.ResMsg[5002])
+	} else {
+		util.Response(c, http.StatusOK, 200, gin.H{"data": dailyDetails})
+	}
+}
+
 func InsertDailyDetailHandler(c *gin.Context) {
 	dailyDetail := model.DailyDetail{}
 	err := c.ShouldBindJSON(&dailyDetail)
 	if err != nil {
 		util.Response(c, http.StatusBadRequest, 4001, util.ResMsg[4001])
+		return
 	}
 	ok := dailyDetail.Create()
 	if !ok {
@@ -42,6 +55,7 @@ func DeleteDailyDetailHandler(c *gin.Context) {
 	err := c.ShouldBindJSON(&dailyDetail)
 	if err != nil {
 		util.Response(c, http.StatusBadRequest, 4001, util.ResMsg[4001])
+		return
 	}
 	ok := dailyDetail.Delete()
 	if !ok {
@@ -56,6 +70,7 @@ func UpdateDailyDetailHandler(c *gin.Context) {
 	err := c.ShouldBindJSON(&dailyDetail)
 	if err != nil {
 		util.Response(c, http.StatusBadRequest, 4001, util.ResMsg[4001])
+		return
 	}
 	ok := dailyDetail.Update()
 	if !ok {

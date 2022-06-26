@@ -50,7 +50,7 @@
       <div class="flex flex-col items-start" v-show="currentDailyPlanID !== -1">
         <div class="m-2" v-for="(item, index)  in weekPlanData" v-bind:item="item" v-bind:index="index"
           v-bind:key="item.ID">
-          <el-checkbox v-model="item.check" size="medium" @change=""
+          <el-checkbox v-model="item.check" size="medium" @change="check(item)"
             :disabled="item.daily_plan_id !== -1 && item.daily_plan_id !== currentDailyPlanID" border>{{item.name}}
           </el-checkbox>
         </div>
@@ -62,6 +62,7 @@
 <script>
 import { getDailyPlan, addDailyPlan, updateDailyPlan, deleteDailyPlan } from '../../api/dailyPlan'
 import { getDailyDetail, addDailyDetail, updateDailyDetail, deleteDailyDetail } from '../../api/dailyDetail'
+import { getWeekPlan, addWeekPlan, updateWeekPlan, deleteWeekPlan } from '../../api/weekPlan'
 export default {
   name: 'Daily',
   data () {
@@ -92,7 +93,7 @@ export default {
   methods: {
     initWeek () {
       this.weekPlanData.length = 0;
-      for (let i = 1; i <= 7; i++) {
+      for (let i = 0; i <= 6; i++) {
         this.weekPlanData.push(
           {
             daily_plan_id: -1,
@@ -102,10 +103,28 @@ export default {
           }
         )
       }
+      let tmpData = [];
+      getWeekPlan({})
+        .then((response) => {
+          tmpData = response.data;
+          tmpData.forEach((value, index, array) => {
+            this.weekPlanData[value.week].ID = value.ID;
+            this.weekPlanData[value.week].daily_plan_id = value.daily_plan_id;
+            this.weekPlanData[value.week].check = true;
+          })
+        })
+        .catch((error) => {
+          this.$message({
+            message: error,
+            center: true,
+          });
+        });
     },
 
     formatWeek (week) {
       switch (week) {
+        case 0:
+          return '星期天';
         case 1:
           return '星期一';
         case 2:
@@ -118,9 +137,6 @@ export default {
           return '星期五';
         case 6:
           return '星期六';
-        case 7:
-          return '星期天';
-
       }
     },
 
@@ -270,6 +286,37 @@ export default {
     clickPlan (id) {
       this.getDetailData(id);
       this.initWeek();
+    },
+
+    check (item) {
+      if (item.check) {
+        addWeekPlan({
+          daily_plan_id: this.currentDailyPlanID,
+          week: item.week
+        })
+          .then((response) => {
+            this.initWeek();
+          })
+          .catch((error) => {
+            this.$message({
+              message: error,
+              center: true,
+            });
+          });
+      } else {
+        deleteWeekPlan({
+          id: item.ID
+        })
+          .then((response) => {
+            this.initWeek();
+          })
+          .catch((error) => {
+            this.$message({
+              message: error,
+              center: true,
+            });
+          });
+      }
     }
   }
 }

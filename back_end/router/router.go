@@ -72,6 +72,7 @@ func initRouter() {
 		dailydetail := v1.Group("/dailydetail")
 		{
 			dailydetail.GET("", handle.GetDailyDetailHandler)
+			dailydetail.GET("/today", handle.GetTodayDailyDetailHandler)
 			dailydetail.POST("", handle.InsertDailyDetailHandler)
 			dailydetail.PUT("", handle.UpdateDailyDetailHandler)
 			dailydetail.DELETE("", handle.DeleteDailyDetailHandler)

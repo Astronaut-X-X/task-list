@@ -1,6 +1,10 @@
 package model
 
-import "gorm.io/gorm"
+import (
+	"time"
+
+	"gorm.io/gorm"
+)
 
 type WeekPlan struct {
 	UserId      uint `json:"user_id" gorm:"not null;"`
@@ -43,4 +47,13 @@ func SelecetWeekPlanByUserId(userid uint) (weekPlans []WeekPlan, ok bool) {
 		return weekPlans, false
 	}
 	return weekPlans, true
+}
+
+func SelecetWeekPlanByUserIdAndWeek(userid uint, week time.Weekday) (weekPlan WeekPlan, ok bool) {
+	err := DB.Where("user_id = ?", userid).Where("week = ?", week).First(&weekPlan).Error
+	if err != nil {
+		// TODO log
+		return weekPlan, false
+	}
+	return weekPlan, true
 }

@@ -31,6 +31,9 @@ func init() {
 			TablePrefix: config.DB_TablePrefix,
 		},
 	})
+	// Debug
+	DB = DB.Debug()
+
 	if err != nil {
 		// TODO log
 		panic("Something worry with open db.")

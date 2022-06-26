@@ -3,7 +3,7 @@
     <div class="px-6 py-3 basis-1/6 border-r">
       <div class="flex flex-col items-end">
         <a class="mx-4 p-2 tracking-wide hover:text-blue-500 transition-all" @click="daily">日计划</a>
-        <a class="mx-4 p-2 tracking-wide hover:text-blue-500 transition-all" @click="goal">目标</a>
+        <a class="mx-4 p-2 tracking-wide hover:text-blue-500 transition-all" @click="goal">任务</a>
         <a class="mx-4 p-2 tracking-wide hover:text-blue-500 transition-all" @click="todo">代办事项</a>
         <a class="mx-4 p-2 tracking-wide hover:text-blue-500 transition-all" @click="quotes">励志名言</a>
         <a class="mx-4 p-2 tracking-wide hover:text-blue-500 transition-all" @click="happy">开心的事</a>

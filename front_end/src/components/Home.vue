@@ -1,7 +1,7 @@
 <template>
   <div>
     <header-vue></header-vue>
-    <main class="px-16 py-6">
+    <main class="px-16 py-6 h-full">
       <transition name="el-fade-in-linear" mode="out-in">
         <router-view></router-view>
       </transition>
