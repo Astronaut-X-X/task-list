@@ -16,7 +16,7 @@
     <div class="px-6 py-3 basis-4/12">
       <p class="mb-6 text-2xl">任务</p>
     </div>
-    <div class="px-6 py-3  basis-4/12">
+    <div class="px-6 py-3 basis-4/12">
       <div class="flex flex-col">
         <div class="basis-4/12 min-h-40">
           <p class="mb-6 text-2xl">励志名言</p>
@@ -25,7 +25,7 @@
               @click="refreshQuote(item)"></i>
           </p>
           <p class="indent-xl">希望是附丽于存在的，有存在，便有希望，有希望，便是光明。</p>
-          <p class="text-right pre-content">鲁迅</p>
+          <p class="text-right pre-quote-author">鲁迅</p>
         </div>
         <div class="basis-4/12 min-h-40 max-h-60 overflow-scroll overflow-x-hidden">
           <p class="mb-6 text-2xl">代办事项</p>
@@ -76,7 +76,7 @@ export default {
 </script>
 
 <style>
-.pre-content::before {
-  content: "——";
+.pre-quote-author::before {
+  content: "—— ";
 }
 </style>

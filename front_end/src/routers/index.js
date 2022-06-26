@@ -18,7 +18,7 @@ const routes = [
     name: 'Home',
     meta: { title: '首页' },
     component: () => import('../components/Home.vue'),
-    redirect: { name: 'Index' },
+    redirect: { name: 'Today' },
     children: [
       {
         path: '/index',
@@ -76,10 +76,10 @@ const routes = [
             component: () => import('../components/manage/Goal.vue'),
           },
           {
-            path: 'quotes',
-            name: 'Quotes',
+            path: 'quote',
+            name: 'Quote',
             meta: { title: '待办事项' },
-            component: () => import('../components/manage/Quotes.vue'),
+            component: () => import('../components/manage/Quote.vue'),
           },
           {
             path: 'happy',

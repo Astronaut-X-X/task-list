@@ -8,6 +8,8 @@ A Web project that makes the task list built by Golang and Vue.
 
 - [ ] 用户修改用户信息时，需要检测用户名是否重复 合法
 - [ ] 用户修改用户信息时，后端需要检测邮箱是否合法
+- [ ] 日计划增加一个复制功能，直接复制一个模板
+- [ ] Today 日计划 根据当前时间高亮 当前活动
 
 # BUG
 

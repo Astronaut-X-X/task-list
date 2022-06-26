@@ -5,11 +5,11 @@
         <a class="mx-4 p-2 tracking-wide hover:text-blue-500 transition-all" @click="daily">日计划</a>
         <a class="mx-4 p-2 tracking-wide hover:text-blue-500 transition-all" @click="goal">任务</a>
         <a class="mx-4 p-2 tracking-wide hover:text-blue-500 transition-all" @click="todo">代办事项</a>
-        <a class="mx-4 p-2 tracking-wide hover:text-blue-500 transition-all" @click="quotes">励志名言</a>
+        <a class="mx-4 p-2 tracking-wide hover:text-blue-500 transition-all" @click="quote">励志名言</a>
         <a class="mx-4 p-2 tracking-wide hover:text-blue-500 transition-all" @click="happy">开心的事</a>
       </div>
     </div>
-    <div class="px-6 py-3 basis-5/6">
+    <div class="px-6 basis-5/6">
       <router-view></router-view>
     </div>
   </div>
@@ -35,8 +35,8 @@ export default {
     todo () {
       this.$router.push({ path: '/manage/todo' });
     },
-    quotes () {
-      this.$router.push({ path: '/manage/quotes' });
+    quote () {
+      this.$router.push({ path: '/manage/quote' });
     },
     happy () {
       this.$router.push({ path: '/manage/happy' });

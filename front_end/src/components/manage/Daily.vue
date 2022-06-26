@@ -1,6 +1,6 @@
 <template>
   <div class="flex">
-    <div class="px-6 py-3 basis-1/6 border-r">
+    <div class="px-6 basis-1/6 border-r">
       <div class="flex flex-col items-end">
         <i class="el-icon-circle-plus-outline text-xl hover:opacity-60 transition-opacity" @click="insert"></i>
       </div>
@@ -18,7 +18,7 @@
         </div>
       </div>
     </div>
-    <div class="px-6 py-3 basis-3/6">
+    <div class="px-6 basis-4/6">
       <div class="flex flex-col items-end">
         <i class="el-icon-circle-plus-outline text-xl hover:opacity-60 transition-opacity"
           v-show="currentDailyPlanID !== -1" @click="insertDetail"></i>
@@ -46,7 +46,7 @@
         </div>
       </div>
     </div>
-    <div class="px-6 py-3 basis-2/6">
+    <div class="px-6 basis-1/6">
       <div class="flex flex-col items-start" v-show="currentDailyPlanID !== -1">
         <div class="m-2" v-for="(item, index)  in weekPlanData" v-bind:item="item" v-bind:index="index"
           v-bind:key="item.ID">
