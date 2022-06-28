@@ -35,20 +35,20 @@ func init() {
 
 func initRouter() {
 	{
-		R.GET("", handle.DefaultHandler)
-		R.POST("", handle.DefaultHandler)
-		R.PUT("", handle.DefaultHandler)
-		R.DELETE("", handle.DefaultHandler)
-		R.PATCH("", handle.DefaultHandler)
-		R.HEAD("", handle.DefaultHandler)
-		R.OPTIONS("", handle.DefaultHandler)
+		R.GET("", handle.DefaultHandle)
+		R.POST("", handle.DefaultHandle)
+		R.PUT("", handle.DefaultHandle)
+		R.DELETE("", handle.DefaultHandle)
+		R.PATCH("", handle.DefaultHandle)
+		R.HEAD("", handle.DefaultHandle)
+		R.OPTIONS("", handle.DefaultHandle)
 	}
 
 	api := R.Group("/api")
 	auth := api.Group("/auth")
 	{
-		auth.POST("/login", handle.LoginHandler)
-		auth.POST("/register", handle.RegisterHandler)
+		auth.POST("/login", handle.LoginHandle)
+		auth.POST("/register", handle.RegisterHandle)
 		auth.POST("/flash", handle.FlashToken)
 	}
 
@@ -56,50 +56,51 @@ func initRouter() {
 	{
 		user := v1.Group("/user")
 		{
-			user.GET("", handle.GetUserHandler)
-			user.PUT("", handle.UpdateUserHandler)
-			user.POST("/image", handle.UploadUserImageHandler)
+			user.GET("", handle.GetUserHandle)
+			user.PUT("", handle.UpdateUserHandle)
+			user.POST("/image", handle.UploadUserImageHandle)
 		}
 
 		dailyplan := v1.Group("/dailyplan")
 		{
-			dailyplan.GET("", handle.GetDailyPlanHandler)
-			dailyplan.POST("", handle.InsertDailyPlanHandler)
-			dailyplan.PUT("", handle.UpdateDailyPlanHandler)
-			dailyplan.DELETE("", handle.DeleteDailyPlanHandler)
+			dailyplan.GET("", handle.GetDailyPlanHandle)
+			dailyplan.POST("", handle.InsertDailyPlanHandle)
+			dailyplan.PUT("", handle.UpdateDailyPlanHandle)
+			dailyplan.DELETE("", handle.DeleteDailyPlanHandle)
 		}
 
 		dailydetail := v1.Group("/dailydetail")
 		{
-			dailydetail.GET("", handle.GetDailyDetailHandler)
-			dailydetail.GET("/today", handle.GetTodayDailyDetailHandler)
-			dailydetail.POST("", handle.InsertDailyDetailHandler)
-			dailydetail.PUT("", handle.UpdateDailyDetailHandler)
-			dailydetail.DELETE("", handle.DeleteDailyDetailHandler)
+			dailydetail.GET("", handle.GetDailyDetailHandle)
+			dailydetail.GET("/today", handle.GetTodayDailyDetailHandle)
+			dailydetail.POST("", handle.InsertDailyDetailHandle)
+			dailydetail.PUT("", handle.UpdateDailyDetailHandle)
+			dailydetail.DELETE("", handle.DeleteDailyDetailHandle)
 		}
 
 		weekplan := v1.Group("/weekplan")
 		{
-			weekplan.GET("", handle.GetWeekPlanHandler)
-			weekplan.POST("", handle.InsertWeekPlanHandler)
-			weekplan.PUT("", handle.UpdateWeekPlanHandler)
-			weekplan.DELETE("", handle.DeleteWeekPlanHandler)
-		}
-
-		tasklist := v1.Group("/tasklsit")
-		{
-			tasklist.GET("", handle.DefaultHandler)
-			tasklist.POST("")
-			tasklist.PUT("")
-			tasklist.DELETE("")
+			weekplan.GET("", handle.GetWeekPlanHandle)
+			weekplan.POST("", handle.InsertWeekPlanHandle)
+			weekplan.PUT("", handle.UpdateWeekPlanHandle)
+			weekplan.DELETE("", handle.DeleteWeekPlanHandle)
 		}
 
 		task := v1.Group("/task")
 		{
-			task.GET("")
-			task.POST("")
-			task.PUT("")
-			task.DELETE("")
+			task.GET("", handle.GetTaskHandle)
+			task.GET("/today", handle.GetTaskHandle)
+			task.POST("", handle.InsertTaskHandle)
+			task.PUT("", handle.UpdateTaskHandle)
+			task.DELETE("", handle.DeleteTaskHandle)
+		}
+
+		tasklist := v1.Group("/tasklsit")
+		{
+			tasklist.GET("", handle.DefaultHandle)
+			tasklist.POST("")
+			tasklist.PUT("")
+			tasklist.DELETE("")
 		}
 
 		todo := v1.Group("/todo")

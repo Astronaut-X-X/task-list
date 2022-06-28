@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func GetWeekPlanHandler(c *gin.Context) {
+func GetWeekPlanHandle(c *gin.Context) {
 	id := c.GetFloat64("id")
 	res, ok := model.SelecetWeekPlanByUserId(uint(id))
 	if !ok {
@@ -18,7 +18,7 @@ func GetWeekPlanHandler(c *gin.Context) {
 	}
 }
 
-func InsertWeekPlanHandler(c *gin.Context) {
+func InsertWeekPlanHandle(c *gin.Context) {
 	id := c.GetFloat64("id")
 	weekplan := model.WeekPlan{}
 	err := c.ShouldBindJSON(&weekplan)
@@ -34,7 +34,7 @@ func InsertWeekPlanHandler(c *gin.Context) {
 	}
 }
 
-func DeleteWeekPlanHandler(c *gin.Context) {
+func DeleteWeekPlanHandle(c *gin.Context) {
 	weekplan := model.WeekPlan{}
 	err := c.ShouldBindJSON(&weekplan)
 	if err != nil {
@@ -48,7 +48,7 @@ func DeleteWeekPlanHandler(c *gin.Context) {
 	}
 }
 
-func UpdateWeekPlanHandler(c *gin.Context) {
+func UpdateWeekPlanHandle(c *gin.Context) {
 	weekplan := model.WeekPlan{}
 	err := c.ShouldBindJSON(&weekplan)
 	if err != nil {

@@ -8,10 +8,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func DefaultHandler(c *gin.Context) {
+func DefaultHandle(c *gin.Context) {
 	util.Response(c, http.StatusOK, 201, util.ResMsg[201])
 }
 
-func HomeHandler(c *gin.Context) {
+func HomeHandle(c *gin.Context) {
 	util.Response(c, http.StatusOK, 200, "OK")
 }

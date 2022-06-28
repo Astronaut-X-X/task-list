@@ -7,35 +7,56 @@ import (
 )
 
 type Task struct {
-	UserId   uint      `json:"userid" gorm:"not null;"`
+	UserId   uint      `json:"user_id" gorm:"not null;"`
 	Cotent   string    `json:"content" gorm:"default 'todu'"`
-	Done     uint      `json:"done" gorm:"default 0"`
+	Done     bool      `json:"done" gorm:"default false"`
 	Time     time.Time `json:"time" gorm:""`
 	Meridiem string    `json:"meridiem" gorm:"default 'am'"`
 	Color    string    `json:"color" gorm:"default '#c2e9fb'"`
 	gorm.Model
 }
 
-func (task *Task) Create() (tx *gorm.DB, ok bool) {
-	result := DB.Create(task)
-	if result.RowsAffected > 0 {
-		return result, true
+func (item *Task) Create() (ok bool) {
+	err := DB.Create(item).Error
+	if err != nil {
+		// TODO log
+		return false
 	}
-	return result, false
+	return true
 }
 
-func (task *Task) Update() (tx *gorm.DB, ok bool) {
-	result := DB.Where("id = ?", task.Model.ID).Save(task)
-	if result.RowsAffected > 0 {
-		return result, true
+func (item *Task) Update() (ok bool) {
+	err := DB.Where("id = ?", item.Model.ID).Save(item).Error
+	if err != nil {
+		// TODO log
+		return false
 	}
-	return result, false
+	return true
 }
 
-func (task *Task) Delete() (tx *gorm.DB, ok bool) {
-	result := DB.Where("id = ?", task.Model.ID).Delete(&Task{})
-	if result.Error == nil {
-		return result, true
+func (item *Task) Delete() (ok bool) {
+	err := DB.Where("id = ?", item.Model.ID).Delete(&Task{}).Error
+	if err != nil {
+		// TODO log
+		return false
 	}
-	return result, false
+	return true
+}
+
+func SelecetTaskByUserIdAndTime(userid uint, start, end time.Time) (tasks []Task, ok bool) {
+	err := DB.Where("user_id = ?", userid).Where("time BETWEEN ? AND ?", start, end).Find(&tasks).Error
+	if err != nil {
+		// TODO log
+		return tasks, false
+	}
+	return tasks, true
+}
+
+func SelecetTaskByID(id uint) (task Task, ok bool) {
+	err := DB.Where("id = ?", id).First(&task).Error
+	if err != nil {
+		// TODO log
+		return task, false
+	}
+	return task, true
 }

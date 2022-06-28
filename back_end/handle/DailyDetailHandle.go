@@ -10,7 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func GetDailyDetailHandler(c *gin.Context) {
+func GetDailyDetailHandle(c *gin.Context) {
 	strId := c.Query("id")
 	id, err := strconv.Atoi(strId)
 	if err != nil {
@@ -25,7 +25,7 @@ func GetDailyDetailHandler(c *gin.Context) {
 	}
 }
 
-func GetTodayDailyDetailHandler(c *gin.Context) {
+func GetTodayDailyDetailHandle(c *gin.Context) {
 	id := c.GetFloat64("id")
 	dailyDetails, ok := service.GetTodayDailyDetailService(uint(id))
 	if !ok {
@@ -35,7 +35,7 @@ func GetTodayDailyDetailHandler(c *gin.Context) {
 	}
 }
 
-func InsertDailyDetailHandler(c *gin.Context) {
+func InsertDailyDetailHandle(c *gin.Context) {
 	dailyDetail := model.DailyDetail{}
 	err := c.ShouldBindJSON(&dailyDetail)
 	if err != nil {
@@ -50,7 +50,7 @@ func InsertDailyDetailHandler(c *gin.Context) {
 	}
 }
 
-func DeleteDailyDetailHandler(c *gin.Context) {
+func DeleteDailyDetailHandle(c *gin.Context) {
 	dailyDetail := model.DailyDetail{}
 	err := c.ShouldBindJSON(&dailyDetail)
 	if err != nil {
@@ -65,7 +65,7 @@ func DeleteDailyDetailHandler(c *gin.Context) {
 	}
 }
 
-func UpdateDailyDetailHandler(c *gin.Context) {
+func UpdateDailyDetailHandle(c *gin.Context) {
 	dailyDetail := model.DailyDetail{}
 	err := c.ShouldBindJSON(&dailyDetail)
 	if err != nil {

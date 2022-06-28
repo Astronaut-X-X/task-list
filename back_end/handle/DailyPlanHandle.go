@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func GetDailyPlanHandler(c *gin.Context) {
+func GetDailyPlanHandle(c *gin.Context) {
 	id := c.GetFloat64("id")
 	res, ok := model.SelecetDailyPlanByUserId(uint(id))
 	if !ok {
@@ -18,7 +18,7 @@ func GetDailyPlanHandler(c *gin.Context) {
 	}
 }
 
-func InsertDailyPlanHandler(c *gin.Context) {
+func InsertDailyPlanHandle(c *gin.Context) {
 	dailyPlan := model.DailyPlan{}
 	err := c.ShouldBindJSON(&dailyPlan)
 	if err != nil {
@@ -33,7 +33,7 @@ func InsertDailyPlanHandler(c *gin.Context) {
 	}
 }
 
-func DeleteDailyPlanHandler(c *gin.Context) {
+func DeleteDailyPlanHandle(c *gin.Context) {
 	dailyPlan := model.DailyPlan{}
 	err := c.ShouldBindJSON(&dailyPlan)
 	if err != nil {
@@ -47,7 +47,7 @@ func DeleteDailyPlanHandler(c *gin.Context) {
 	}
 }
 
-func UpdateDailyPlanHandler(c *gin.Context) {
+func UpdateDailyPlanHandle(c *gin.Context) {
 	dailyPlan := model.DailyPlan{}
 	err := c.ShouldBindJSON(&dailyPlan)
 	if err != nil {

@@ -70,10 +70,10 @@ const routes = [
             component: () => import('../components/manage/Todo.vue'),
           },
           {
-            path: 'goal',
-            name: 'Goal',
-            meta: { title: '待办事项' },
-            component: () => import('../components/manage/Goal.vue'),
+            path: 'task',
+            name: 'Task',
+            meta: { title: '任务' },
+            component: () => import('../components/manage/Task.vue'),
           },
           {
             path: 'quote',

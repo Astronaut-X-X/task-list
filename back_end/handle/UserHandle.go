@@ -13,7 +13,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func LoginHandler(c *gin.Context) {
+func LoginHandle(c *gin.Context) {
 	var user model.User
 	err := c.ShouldBindJSON(&user)
 	if err != nil {
@@ -33,7 +33,7 @@ func LoginHandler(c *gin.Context) {
 	}
 }
 
-func RegisterHandler(c *gin.Context) {
+func RegisterHandle(c *gin.Context) {
 	var user model.User
 	err := c.ShouldBindJSON(&user) // TODO deal err
 	if err != nil {
@@ -57,7 +57,7 @@ func RegisterHandler(c *gin.Context) {
 	}
 }
 
-func GetUserHandler(c *gin.Context) {
+func GetUserHandle(c *gin.Context) {
 	id := c.GetFloat64("id")
 	user, ok := model.SelectUserById(int(id))
 	if ok {
@@ -78,7 +78,7 @@ func FlashToken(c *gin.Context) {
 	}
 }
 
-func UploadUserImageHandler(c *gin.Context) {
+func UploadUserImageHandle(c *gin.Context) {
 	file, _ := c.FormFile("file")
 	path := "./static"
 	tmpFilename := uuid.New()
@@ -101,7 +101,7 @@ func UploadUserImageHandler(c *gin.Context) {
 	}
 }
 
-func UpdateUserHandler(c *gin.Context) {
+func UpdateUserHandle(c *gin.Context) {
 	var resUser model.User
 	err := c.ShouldBindJSON(&resUser) // TODO deal err
 	if err != nil {
