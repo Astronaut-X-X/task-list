@@ -25,7 +25,8 @@
           <el-input v-model="item.content" size="small" @keyup.enter.native="finishEditTask(item)"
             @blur="finishEditTask(item)" v-show="index === editingTask">
           </el-input>
-          <el-checkbox v-model="item.done" v-show="index !== editingTask">{{item.content}}
+          <el-checkbox v-model="item.done" v-show="index !== editingTask" @change="finishEditTask(item)" border>
+            {{item.content}}
           </el-checkbox>
           <i class="el-icon-edit text-xl opacity-20 ml-6  hover:opacity-100 transition-opacity"
             @click="editTask(item,index)"></i>

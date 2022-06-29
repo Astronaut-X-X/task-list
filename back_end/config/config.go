@@ -12,8 +12,8 @@ const DB_HOST string = "localhost"
 const DB_PORT string = "3306"
 const DB_DATABASE_NAME = "tl"
 const DB_CHARSET = "utf8mb4"
-const DB_PARSETIME = "true" // Parse tiem
-// const DB_LOC = "local" // Local time
+const DB_PARSETIME = "true"  // Parse tiem
+const DB_LOC = "Local"       // Local time
 const DB_TablePrefix = "tl_" // Table Prefix
 
 // Web config

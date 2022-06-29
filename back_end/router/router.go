@@ -88,7 +88,7 @@ func initRouter() {
 
 		task := v1.Group("/task")
 		{
-			task.GET("", handle.GetTaskHandle)
+			task.GET("", handle.GetAllTaskHandle)
 			task.GET("/today", handle.GetTaskHandle)
 			task.POST("", handle.InsertTaskHandle)
 			task.PUT("", handle.UpdateTaskHandle)

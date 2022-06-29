@@ -15,7 +15,7 @@ var DB *gorm.DB
 func init() {
 
 	// dsn := fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?charset=%v&parseTime=%v&loc=%v",
-	dsn := fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?charset=%v&parseTime=%v",
+	dsn := fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?charset=%v&parseTime=%v&loc=%v",
 		config.DB_USERNAME,
 		config.DB_PASSWORD,
 		config.DB_HOST,
@@ -23,7 +23,7 @@ func init() {
 		config.DB_DATABASE_NAME,
 		config.DB_CHARSET,
 		config.DB_PARSETIME,
-		// config.DB_LOC,
+		config.DB_LOC,
 	)
 	var err error
 	DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{

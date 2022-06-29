@@ -60,3 +60,12 @@ func SelecetTaskByID(id uint) (task Task, ok bool) {
 	}
 	return task, true
 }
+
+func SelecetTaskByUserId(userid uint) (tasks []Task, ok bool) {
+	err := DB.Where("user_id = ?", userid).Order("time desc").Find(&tasks).Error
+	if err != nil {
+		// TODO log
+		return tasks, false
+	}
+	return tasks, true
+}
