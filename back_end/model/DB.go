@@ -51,5 +51,6 @@ func migrate() {
 		&DailyPlan{},
 		&DailyDetail{},
 		&WeekPlan{},
+		&Happy{},
 	)
 }

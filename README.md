@@ -1,7 +1,7 @@
 <div align=center>
 <div style="font-size:4rem">TaskList</div>
 <div style="font-size:8rem">📝</div>
-<img src="https://img.shields.io/badge/golang-1.16-blue"/>
+<img src="https://img.shields.io/badge/golang-1.18-blue"/>
 <img src="https://img.shields.io/badge/gin-1.7.7-lightBlue"/>
 <img src="https://img.shields.io/badge/vue-2.6.14-brightgreen"/>
 <img src="https://img.shields.io/badge/element--ui-2.15.8-blue"/>
@@ -22,6 +22,7 @@
 - [ ] Today 日计划 根据当前时间高亮 当前活动
 - [ ] 划分任务的紧急程度
 - [ ] 任务拖拽排序
+- [ ] 日志
 
 ## BUG
 

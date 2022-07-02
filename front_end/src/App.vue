@@ -44,4 +44,13 @@ body {
   background-color: rgba(229, 231, 235, var(--tw-bg-opacity));
   border-radius: 9999px;
 }
+
+.el-checkbox__label {
+  font-size: 16px !important;
+}
+
+.el-checkbox__inner {
+  height: 17px !important;
+  width: 17px !important;
+}
 </style>

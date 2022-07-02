@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { getTask } from '../../api/Task'
+import { getTask } from '../../api/task'
 export default {
   name: 'Task',
 

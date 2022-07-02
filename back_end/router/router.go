@@ -95,6 +95,25 @@ func initRouter() {
 			task.DELETE("", handle.DeleteTaskHandle)
 		}
 
+		todo := v1.Group("/todo")
+		{
+			todo.GET("", handle.GetAllTodoHandle)
+			todo.GET("/today", handle.GetTodoHandle)
+			todo.POST("", handle.InsertTodoHandle)
+			todo.PUT("", handle.UpdateTodoHandle)
+			todo.DELETE("", handle.DeleteTodoHandle)
+		}
+
+		happy := v1.Group("/happy")
+		{
+			happy.GET("", handle.GetAllHappyHandle)
+			happy.GET("", handle.GetHappyPageHandle)
+			happy.GET("/today", handle.GetHappyHandle)
+			happy.POST("", handle.InsertHappyHandle)
+			happy.PUT("", handle.UpdateHappyHandle)
+			happy.DELETE("", handle.DeleteHappyHandle)
+		}
+
 		tasklist := v1.Group("/tasklsit")
 		{
 			tasklist.GET("", handle.DefaultHandle)
@@ -103,21 +122,6 @@ func initRouter() {
 			tasklist.DELETE("")
 		}
 
-		todo := v1.Group("/todo")
-		{
-			todo.GET("")
-			todo.POST("")
-			todo.PUT("")
-			todo.DELETE("")
-		}
-
-		goal := v1.Group("/goal")
-		{
-			goal.GET("")
-			goal.POST("")
-			goal.PUT("")
-			goal.DELETE("")
-		}
 	}
 
 	// v2 TODO
